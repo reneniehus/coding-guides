@@ -10,12 +10,12 @@ Code should read like a well-kept lab notebook: the comments tell the story, the
 
 - **Governs** how code inside `.R` files, and R chunks in Quarto `.qmd` documents (the standard; legacy `.Rmd` follows the same rules until converted), reads: layout, comments, names, grammar, functions, console output and plots.
 - **Does not govern** how the repository is organised, how data moves between scripts, or how tests are applied. That is the [Repo Practice Guide](REPO_PRACTICE_GUIDE.md).
-- **Built on** your own conventions where they help you read code (the `+++` banners, `|-` section markers, one `params` list, coloured progress lines), and on the tidyverse style guide for everything else. Where this guide is silent, the tidyverse style guide applies.
-- **Two strengths of rule.** *Must* is the default you break only with a comment saying why. *Prefer* is a default you may overrule with judgement.
+- **Built on** a preferred house style where it makes code easier to read (the `+++` banners, `|-` section markers, one `params` list, coloured progress lines), and on the tidyverse style guide for everything else. Where this guide is silent, the tidyverse style guide applies.
+- **Two strengths of rule.** *Must* is the default, broken only with a comment saying why. *Prefer* is a default that judgement may overrule.
 
 Four principles sit behind every rule:
 
-1. **Write for the reader six months from now.** Usually that is you, under time pressure, checking a number before a meeting.
+1. **Write for the reader six months from now.** Usually that is the author, under time pressure, checking a number before a meeting.
 2. **Say why, show what.** Comments carry intent, assumptions and units; the code carries the mechanics.
 3. **Make wrong data and every data change loud.** Code that reads data checks it first, and wrong data stops the run or raises a warning that cannot be missed. Every change to the data is counted and reported (rows or columns dropped, columns renamed), and the code says what it wrote.
 4. **Prefer explicit, unsurprising code over compact code.** Spell out the steps, name the intermediate results, and choose the obvious construct over the clever one; a reader should never have to decode a line to trust it.
@@ -150,7 +150,7 @@ cli_alert_success("Wrote {.file {OUT_FILE}}: {nrow(ili_by_country_week)} rows, {
 
 ## Signature comments
 
-Comments follow Rene's signature layout and carry the reasoning, shapes and history that the code itself cannot show.
+Comments follow the house layout and carry the reasoning, shapes and history that the code itself cannot show.
 
 ```r
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -179,7 +179,7 @@ severity_modulated <- function(severity_baseline,  # [a] risk of a severe outcom
 - **Must** give every params entry and constant an inline comment saying what it controls, with its unit when it has one. For a switch, say what each value does: `params$rapid_stan_fit <- TRUE  # TRUE: variational fit, minutes not hours`.
 - **Must** name the incident in one line wherever code guards against a past failure. It stops a later tidy-up from bringing the bug back.
 - **Must** write TODOs as `# TODO(name, YYYY-MM): what and why`. An owner and a month make stale notes findable.
-- **Must** leave no commented-out code: no old versions, alternatives or disabled `library()` calls, because git keeps them. A one-line usage example with its result (`# e.g. odds(0.4) is 0.667`) and one line on an approach you tried and why it lost are welcome.
+- **Must** leave no commented-out code: no old versions, alternatives or disabled `library()` calls, because git keeps them. A one-line usage example with its result (`# e.g. odds(0.4) is 0.667`) and one line on an approach that was tried and why it lost are welcome.
 - **Must** keep identifying data, credentials and machine-specific paths out of comments. Comments travel with the code into every clone and every public mirror.
 - **Prefer** documenting a function with one line above it and an inline comment per argument, as above; package-shaped repos (`R/`) use roxygen `#'` blocks instead. Fragments, lowercase and a first-person notebook voice are fine; ALL-CAPS emphasis is not.
 
@@ -193,7 +193,7 @@ forecasts_final <- filter(forecasts, origin_date < params$as_of)
 # only rounds closed before as_of: an open round's provisional ensemble
 # (10 of 13 models) was nearly used once
 forecasts_final <- filter(forecasts, origin_date < params$as_of)
-# TODO(rene, 2026-12): read the expected number of models per round from hub metadata
+# TODO(jdoe, 2026-12): read the expected number of models per round from hub metadata
 ```
 
 ## Naming
@@ -403,7 +403,7 @@ Console output exists so a scientist can supervise a run as it happens: glance a
 - **Must** muffle only a named, expected warning, around the one call that raises it, with `muffle_warning()` or `suppressWarnings(expr, classes = ...)`. The one blanket form allowed is `suppressPackageStartupMessages()` around `library()` calls.
 - **Prefer** pluralising with `{?s}`, with the count interpolated directly before the noun or set with `cli::qty()`. Example to avoid: "1 weeks behind".
 - **Prefer** switching detail lines with `params$verbose` through one option and one `detail()` helper; stage headers, warnings and errors always print.
-- **Prefer** never attaching tidylog, which masks `filter()`, `mutate()` and the joins. Call `tidylog::filter()` by name at the one step you are auditing.
+- **Prefer** never attaching tidylog, which masks `filter()`, `mutate()` and the joins. Call `tidylog::filter()` by name at the one step being audited.
 
 ```r
 # Avoid
@@ -600,7 +600,7 @@ Every figure belongs to one visual family, shows its units and provenance, and n
 - **Must** not draw ILI or ARI levels of different countries on one shared axis: use a free scale per country or change against each country's baseline, and say so in the caption. Case definitions, sentinel coverage and denominators differ by country.
 - **Must** zoom position axes with `coord_cartesian()`, never with `xlim()`, `ylim()` or position-scale limits, which turn out-of-range values into NA and drop them. Ribbons can lose points that way without a message.
 - **Prefer** a robust colour or fill scale when one outlier would flatten the rest: limits from a stated quantile, `oob = scales::oob_squish`, and the rule in the caption.
-- **Must** drop degenerate cases yourself, with a comment and a reported count, before ggplot drops them silently: `filter(n() >= 2, .by = c(location, round))  # one-point lines would vanish`.
+- **Must** drop degenerate cases explicitly, with a comment and a reported count, before ggplot drops them silently: `filter(n() >= 2, .by = c(location, round))  # one-point lines would vanish`.
 - **Must** place sentinels where the scale transform sends them to the panel edge: on a log10 axis write `ymin = 0`, which becomes -Inf, never `ymin = -Inf`, which becomes NaN and vanishes. Muffle the resulting warning by name (see Console output).
 - **Must** keep plot text ASCII (`-`, `+/-`, `f1^2 / f2`) unless the font is known to carry the glyphs. For example, en-dashes, middots and subscripts can render as dots in a server's font.
 - **Prefer** ISO-week ticks such as `W45`, with the ISO year on the first tick and where the year changes (`2026-W52`, `W53`, `2027-W01`).
@@ -779,9 +779,9 @@ The habits below are owned by other sections; each rule lives in one place only.
 | `require()`, a redefined `library()` | `library()` in one quiet block in setup.R | Formatting |
 | Private aliases (`mlast()`, `g`) | dplyr and stats functions; `~/.Rprofile` | Naming |
 
-## Before you commit a script
+## Before committing a script
 
-Before considering a file ready, read it top to bottom as a colleague encountering it for the first time. Each question below should be answered by the file itself, without running it or asking you.
+Before considering a file ready, read it top to bottom as a colleague encountering it for the first time. Each question below should be answered by the file itself, without running it or asking its author.
 
 | Reader's question | What the code should provide | Where this guide covers it |
 | --- | --- | --- |

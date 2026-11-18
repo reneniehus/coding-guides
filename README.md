@@ -35,3 +35,7 @@ Each release is a git tag (`v1.0`, `v1.1`, ...), and [CHANGELOG.md](CHANGELOG.md
 ## Changing the guides
 
 The markdown files in this repository are the only maintained copy. Propose a change as an issue, or as a pull request that edits the guide directly, and say which rule changes and why. A change that alters a rule carries its CHANGELOG entry in the same pull request.
+
+## Licence
+
+The guides, templates and diagram are licensed under [CC BY 4.0](LICENSE): they may be shared and adapted, including commercially, with attribution. A suitable attribution: "Based on [coding-guides](https://github.com/reneniehus/coding-guides), CC BY 4.0."

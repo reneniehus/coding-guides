@@ -6,7 +6,7 @@
 
 ## Purpose and principles
 
-A healthy project is one an authorised colleague can clone, read top-down from its brief, and rebuild every output with one command, without asking you anything.
+A healthy project is one an authorised colleague can clone, read top-down from its brief, and rebuild every output with one command, without asking its author anything.
 
 That colleague can also answer four questions from the repo alone:
 
@@ -25,7 +25,7 @@ Every rule in this guide follows from five principles:
 4. **One command, one settings object.** A runner script rebuilds the project from its inputs, driven by a single versioned `params` list.
 5. **Health is routine, not heroics.** Quick checks on every commit, a full rebuild before every report.
 
-**Two strengths of rule.** *Must* is the default you break only with a stated reason: a lasting departure goes in the Known departures table of documentation/guides/GUIDES.md, a one-off in a comment where it happens. *Prefer* is a default you may overrule with judgement.
+**Two strengths of rule.** *Must* is the default, broken only with a stated reason: a lasting departure goes in the Known departures table of documentation/guides/GUIDES.md, a one-off in a comment where it happens. *Prefer* is a default that judgement may overrule.
 
 How code inside a file should read is the job of the [R Code Style Guide](R_CODE_STYLE_GUIDE.md).
 
@@ -145,7 +145,7 @@ data/ holds only what came from outside the project, each source in its own fold
 - **Must** keep each delivered extract, and each live download of a source that revises its own history, as a dated vintage folder such as data/erviss/2026-11-13/, never overwritten. For example, ERVISS backfills, so a re-download of the same week can return different numbers.
 - **Must** give every source a row in data/DATA_REGISTER.md: what it is, provider, vintages, refresh script, access level, licence and whether it holds personal data. ECDC falls under Regulation (EU) 2018/1725, so personal data need their record, access list and deletion date named there.
 - **Must** confirm in that row that the licence allows redistribution, with the attribution it requires, before committing a source or tables derived from it to a public repo. For example, committing ERVISS exports, a population table or forecast-hub-derived output/\*.csv to a public repo redistributes them.
-- **Must** treat anything code cannot regenerate as an input, even if you made it, with its own data/ folder and DATA_REGISTER.md row. For example, a hand-made synthesis saved in output/ would be destroyed by a clean; it belongs in data/\<source>/\<date>/.
+- **Must** treat anything code cannot regenerate as an input, even if it was made in-house, with its own data/ folder and DATA_REGISTER.md row. For example, a hand-made synthesis saved in output/ would be destroyed by a clean; it belongs in data/\<source>/\<date>/.
 - **Must** clone external repositories outside the project and locate each through one environment variable, read in settings(), with a default in a sibling folder, such as ../hubs/\<repo> for a forecast-hub clone. Example to avoid: the settings reading one variable while individual scripts read five others, each with a machine-specific default.
 
 When a source is missing, code stops with a message naming its fetch script. For example, a shell script that needs a forecast-hub clone checks for it first:
@@ -165,7 +165,7 @@ params$as_of <- read_as_of(params$mode)  # final-data cut-off; aborts in a full 
 
 - **Must** have each loader read the newest vintage folder dated on or before params$as_of, never the latest folder on disk, through the one setup.R helper `newest_snapshot()` (its code is in the [R Code Style Guide](R_CODE_STYLE_GUIDE.md)), and record its choice in the run manifest. Otherwise the folder read and the as-of date can disagree without anyone noticing.
 - **Must** read the latest week of each series off the data, never from a date typed into a script. Example to avoid: figure scripts that typed `as.Date("2026-09-16")` instead of reading `max(ili_rates$week_end)`, so every weekly refresh needed a hand edit.
-- **Must** record in data_overview.md each check that a field means what its name says, with its agreement rate; the check itself is code, set by the [R Code Style Guide](R_CODE_STYLE_GUIDE.md). Any input field you build on gets this check once, so the next reader knows it was verified. Example to avoid, a forecast hub's 'median' row disagreed with its own 0.5 quantile in 60% of rows, because only a subset of models submitted values in the 'median' row.
+- **Must** record in data_overview.md each check that a field means what its name says, with its agreement rate; the check itself is code, set by the [R Code Style Guide](R_CODE_STYLE_GUIDE.md). Any input field the analysis builds on gets this check once, so the next reader knows it was verified. Example to avoid, a forecast hub's 'median' row disagreed with its own 0.5 quantile in 60% of rows, because only a subset of models submitted values in the 'median' row.
 - **Must** record each splice of two sources in decisions.md, with its tolerance, and keep the not-spliced table in output/tables/; the overlap check is code, set by the R Code Style Guide. Two countries differed by about 40% between an older extract and current data, which a splice would have turned into a trend.
 
 ### Private and restricted data
@@ -317,7 +317,7 @@ Any tagged result must be rebuildable on a new machine from its tag, its lock fi
 - **Must** point renv at a dated P3M snapshot, so renv::restore() installs the same binaries on any machine. An undated repository gives whatever is current on the day, and some networks, such as a cloud container behind a proxy, cannot reach CRAN at all.
 
 ```r
-# .Rprofile: dated snapshot first (use your distribution's codename), then renv
+# .Rprofile: dated snapshot first (use the machine's distribution codename), then renv
 options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/jammy/2026-11-02"))
 source("renv/activate.R")
 ```
