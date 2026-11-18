@@ -1,0 +1,5 @@
+# editor and system files
+.DS_Store
+.Rproj.user/
+.Rhistory
+*.tmp
