@@ -4,6 +4,11 @@ Up: [project brief](../../README.md)
 
 <One paragraph: what this part does, what it hands to the next part, and why.>
 
+**Status:** <running, or "data ready; waiting for the owner's plan"
+([plan_objective<N>.md](../../documentation/plan_objective<N>.md))>. A part that waits lists
+no planned scripts: its one script is a placeholder entry function that reports the wait and
+the data in place, and writes nothing.
+
 **Needs:** data/erviss/<vintage>/ (public); $SURVEY_FULL_PATH (restricted; without it,
 data/survey/survey_public_notext.xlsx is used and free-text outputs are skipped);
 params$as_of.
@@ -21,6 +26,12 @@ params$as_of.
 | 2 | load_survey.R | read the survey, full or public copy | sourced by 00_main.R |
 
 What each script reads and writes is in its header block.
+
+## Outputs by question (optional)
+
+| Output | Serves (objective or question in the brief) |
+|---|---|
+| output/figures/<name>.png | <objective N: what it shows> |
 
 ## Params used
 

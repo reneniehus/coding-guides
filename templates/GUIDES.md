@@ -6,10 +6,12 @@ This project follows the shared guides in [coding-guides](https://github.com/ren
 
 | Guide | Version | Last checked |
 | --- | --- | --- |
-| [R Code Style Guide](https://github.com/reneniehus/coding-guides/blob/v1.0/R_CODE_STYLE_GUIDE.md) | v1.0 | <YYYY-MM-DD> |
-| [Repo Practice Guide](https://github.com/reneniehus/coding-guides/blob/v1.0/REPO_PRACTICE_GUIDE.md) | v1.0 | <YYYY-MM-DD> |
+| [R Code Style Guide](https://github.com/reneniehus/coding-guides/blob/v1.1/R_CODE_STYLE_GUIDE.md) | v1.1 | <YYYY-MM-DD> |
+| [Repo Practice Guide](https://github.com/reneniehus/coding-guides/blob/v1.1/REPO_PRACTICE_GUIDE.md) | v1.1 | <YYYY-MM-DD> |
 
 "Last checked" is the date someone last read this project against that version and fixed, or listed below, whatever did not comply. To move to a newer version, read the [changelog](https://github.com/reneniehus/coding-guides/blob/main/CHANGELOG.md) entries since the version above, apply them, then update the version, the links and the date.
+
+Problems met with the guides, each with a proposed change: [guide_feedback.md](../guide_feedback.md) (optional; delete this line if the page does not exist, and give the page a Map row if it does).
 
 ## Known departures
 

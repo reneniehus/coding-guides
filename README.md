@@ -19,13 +19,18 @@ The R guide covers what happens inside a `.R` file or a Quarto chunk: layout, co
 
 | Template | Becomes, in a project | Holds |
 | --- | --- | --- |
-| [project_README.md](templates/project_README.md) | `README.md` | the project brief: aim, research questions, scope, parts and Map |
-| [PART_folder.md](templates/PART_folder.md) | `code/NN_part/PART_NN_part.md` | one part's scripts in run order, and what the part needs |
+| [project_README.md](templates/project_README.md) | `README.md` | the project brief: aim, objectives and their status, scope, parts and Map |
+| [PART_folder.md](templates/PART_folder.md) | `code/NN_part/PART_NN_part.md` | one part's status, scripts in run order, and what the part needs |
 | [DATA_REGISTER.md](templates/DATA_REGISTER.md) | `data/DATA_REGISTER.md` | provenance, access, licence and personal data, per source |
+| [plan_objective.md](templates/plan_objective.md) | `documentation/plan_<objective>.md` | the owner's plan for one objective: headings only, left empty for the owner |
+| [open_questions.md](templates/open_questions.md) | `documentation/open_questions.md` | decisions that wait for the owner, with the facts each depends on |
 | [GUIDES.md](templates/GUIDES.md) | `documentation/guides/GUIDES.md` | links to these guides, the version followed and the date last checked |
 | [script_header.R](templates/script_header.R) | the top of every run script | Purpose, Inputs, Outputs, Run and Part lines |
-| [function_file_header.R](templates/function_file_header.R) | the top of every function file | Purpose, Sourced by and Part lines |
-| [gitignore](templates/gitignore) | `.gitignore` | session files, the renv library, regenerated outputs, private inputs |
+| [function_file_header.R](templates/function_file_header.R) | the top of every function file | Purpose, Sourced by and Part lines, and Outputs when its functions write |
+| [test-repo-health.R](templates/test-repo-health.R) | `tests/testthat/test-repo-health.R` | checks that links resolve, environment variables are listed, scripts name their path |
+| [Rprofile](templates/Rprofile) | `.Rprofile` | the dated P3M snapshot for the machine's distribution, then renv |
+| [lintr](templates/lintr) | `.lintr` | lint rules that suit a repo of sourced scripts |
+| [gitignore](templates/gitignore) | `.gitignore` | session files, the renv library, run manifests, regenerated outputs, private inputs |
 | [Renviron.example](templates/Renviron.example) | `.Renviron.example` | every environment variable, its default and its meaning |
 
 ## Versions

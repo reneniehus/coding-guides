@@ -21,10 +21,14 @@ Environment and full setup: [quickstart](documentation/quickstart.md).
 
 <One paragraph.>
 
-## Research questions
+## Objectives and status
 
-- RQ1: <question>
-- RQ2: <question>
+| # | Objective or research question | Output | Status | Part page | Plan |
+|---|---|---|---|---|---|
+| 1 | <objective> | <what it delivers> | <e.g. data ready; waiting for the owner's plan> | [part page](code/05_objective1/PART_05_objective1.md) | [plan](documentation/plan_objective1.md) |
+
+Plans are written by the owner; decisions that wait for the owner are on
+[open questions](documentation/open_questions.md).
 
 ## In scope
 
@@ -37,13 +41,14 @@ Environment and full setup: [quickstart](documentation/quickstart.md).
 ## Headline findings
 
 - <one-line finding> ([findings.md, YYYY-MM-DD](documentation/findings.md);
-  `output/tables/<file>.csv`)
+  `output/tables/<file>.csv`), or "None yet: the repo stops before analysis."
 
 ## Map
 
 | Path | Holds | Link |
 |---|---|---|
 | reproduce.sh, fetch-*.sh, refresh-*.sh, run_tests.R | root entry points | see Start here |
+| .Rprofile, .lintr, .gitignore, .Renviron.example, <name>.Rproj, renv/, renv.lock, <uv.lock> | root configuration: P3M snapshot and renv, lint rules, ignored files, environment variables, RStudio project, locks | [quickstart](documentation/quickstart.md) |
 | code/00_main.R | the runner | [00_main.R](code/00_main.R) |
 | code/01_support/, code/02_settings/ | setup, helpers, settings_vN.R | [01_support](code/01_support/), [02_settings](code/02_settings/) |
 | code/03_data/ | load and check inputs | [part page](code/03_data/PART_03_data.md) |
@@ -55,7 +60,9 @@ Environment and full setup: [quickstart](documentation/quickstart.md).
 | output/ | everything code writes | regenerable; see Start here |
 | artefact/ | deliverables that leave the project | tagged, see decisions.md |
 | tests/testthat/ | unit and regression tests | run with run_tests.R |
-| documentation/decisions.md | dated decision log | [decisions](documentation/decisions.md) |
+| documentation/decisions.md | dated log of owner decisions and technical choices | [decisions](documentation/decisions.md) |
+| documentation/open_questions.md | decisions that wait for the owner, with their facts | [open questions](documentation/open_questions.md) |
+| documentation/plan_objective<N>.md | the owner's plan, one page per objective | [plan, objective 1](documentation/plan_objective1.md) |
 | documentation/findings.md | lab notebook of results | [findings](documentation/findings.md) |
 | documentation/reflections.md | interpretation and caveats | [reflections](documentation/reflections.md) |
 | documentation/data_overview.md | what the data mean | [data overview](documentation/data_overview.md) |
@@ -80,3 +87,8 @@ Code: <licence> (LICENSE). Data: per source, see data/DATA_REGISTER.md.
 ## Caveats
 
 - <limits a reader must know before quoting a number>
+
+## References (optional)
+
+- <publications, and the internal documents this brief builds on, with where to find them;
+  an external copy of this brief is regenerated from it or marked with its last sync date>

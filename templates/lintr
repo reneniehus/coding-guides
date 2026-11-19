@@ -1,0 +1,12 @@
+linters: linters_with_defaults(
+    line_length_linter(100L),
+    object_name_linter(styles = c("snake_case", "SNAKE_CASE", "symbols")),
+    object_usage_linter = NULL,
+    pipe_consistency_linter(pipe = "|>"),
+    undesirable_function_linter(fun = c(setwd = "use here::here()", attach = NA,
+      browser = NA, View = NA, require = "use library()",
+      sapply = "use map_*() or vapply()", install.packages = "install through renv")),
+    undesirable_operator_linter()
+  )
+encoding: "UTF-8"
+exclusions: list("renv", "code/99_sandbox")

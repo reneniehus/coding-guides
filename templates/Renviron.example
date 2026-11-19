@@ -1,10 +1,13 @@
 # Copy to .Renviron (never committed) and edit the values for this machine.
 # One block per variable: what it means, the default used when it is unset, and the
 # scripts that read it. Variables are read only inside settings()
-# (code/02_settings/settings_vN.R), never elsewhere in the code.
+# (code/02_settings/settings_vN.R), never elsewhere in the R code. A shell entry point
+# (fetch-*.sh, reproduce.sh) reads only names that settings() also reads, with the same
+# defaults. An empty value counts as unset everywhere.
 
 # As-of date that limits every input (YYYY-MM-DD). A full run stops without it;
-# dev and refresh runs use today when it is unset.
+# dev and refresh runs use today when it is unset, or the newest committed vintage when
+# every input is one.
 # Read by: settings()
 AS_OF=
 
@@ -18,3 +21,8 @@ AS_OF=
 # message saying so.
 # Read by: settings(); used by <code/03_data/load_<source>.R>
 <RESTRICTED_INPUT>_PATH=
+
+# Folder of pretrained model weights, kept outside the repo; only if a step uses a model.
+# Default when unset: ../models
+# Read by: settings(); used by <code/NN_part/forecast_<model>.py>
+MODEL_DIR=
