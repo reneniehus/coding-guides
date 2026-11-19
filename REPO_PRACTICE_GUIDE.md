@@ -381,8 +381,9 @@ source("renv/activate.R")
 ```r
 # ---- |-Check that renv is active ----
 if (!requireNamespace("renv", quietly = TRUE) || is.null(renv::project())) {
+  library_path <- .libPaths()[1]  # cli would read "{.libPaths" as a style, so name it first
   cli::cli_warn(c(
-    "renv is not active: packages come from {.file {.libPaths()[1]}}.",
+    "renv is not active: packages come from {.file {library_path}}.",
     i = "RENV_CONFIG_AUTOLOADER_ENABLED=FALSE, set in some containers, stops activate.R."
   ))
 }
